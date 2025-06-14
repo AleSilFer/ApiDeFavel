@@ -1,0 +1,54 @@
+openapi: 3.1.0
+info:
+  title: GPT DE FAVELA API
+  version: '1.0.0'
+  description: API da Favela Tech — Controle total sobre GitHub, Deploy, Logs e Drive
+servers:
+  - url: https://seu-app.onrender.com
+
+paths:
+  /github/create-repo:
+    post:
+      operationId: github_create_repo
+      summary: Criar repositório no GitHub
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                private:
+                  type: boolean
+              required:
+                - name
+      responses:
+        '200':
+          description: Repositório criado com sucesso
+
+  /github/list-repos:
+    get:
+      operationId: github_list_repos
+      summary: Listar todos os repositórios do GitHub
+      responses:
+        '200':
+          description: Lista de repositórios
+
+  /:
+    get:
+      summary: Status da API
+      operationId: read_root
+      responses:
+        '200':
+          description: Status online da API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
